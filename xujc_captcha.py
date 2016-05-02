@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-import Image, ImageDraw
+import Image
 from pytesseract import *
+from optparse import OptionParser
+import logging
+__author__ = 'luckytianyiyan@gmail.com'
+__version__ = "1.0"
 
 
 def check(xy, img, matrix):
@@ -63,7 +67,7 @@ def clear_noise(img):
                     matrix[x][y] = matrix[x + 1][y]
                     maps[str(matrix[x][y])] += 1
                 else:
-                    n+=1
+                    n += 1
                     maps[str(n)]=1
                     matrix[x][y] = n
 
@@ -73,13 +77,22 @@ def clear_noise(img):
                 img.putpixel((x, y), 255)
 
 
-if __name__ == '__main__':
-    image = Image.open(r'./test_images/WWBS.png')
+def main():
+    parser = OptionParser(usage='%prog filename [options] arg',
+                          version='%prog ' + __version__,
+                          description='recognition captcha for http://jw.xujc.com/')
+    parser.add_option('-v', '--verbose', action="store_true", dest="verbose", help="verbose")
+    (options, args) = parser.parse_args()
+
+    if len(args) < 1:
+        parser.error('filename not given')
+
+    filename = args[0]
+
+    image = Image.open(filename)
     # convert to Gray Scale Image
     gray_img = image.convert('L')
     gray_img.save(r'./gray.png')
-
-    print 'image size:', gray_img.size
 
     print image_to_string(gray_img, lang='xujc')
 
@@ -98,6 +111,11 @@ if __name__ == '__main__':
     gray_img.save(r'./clear_noise.png')
 
     print image_to_string(gray_img, lang='xujc')
+
+
+if __name__ == '__main__':
+    main()
+
 
 
 
