@@ -7,11 +7,11 @@ Get Start
 
   Debian:
   ```shell
-$ sudo apt-get install python-imaging
+  $ sudo apt-get install python-imaging
   ```
   OS X or Other Linux:
   ```shell
-$ sudo easy_install PIL
+  $ sudo easy_install PIL
   ```
   Other platform:
 
@@ -20,13 +20,26 @@ $ sudo easy_install PIL
 2. install pytesser
 
   ```shell
-$ sudo apt-get install tesseract-ocr
-$ sudo pip install pytesseract
+  $ sudo apt-get install tesseract-ocr
+  $ sudo pip install pytesseract
   ```
 3. copy traindata
 
-  copy traindata/xujc.traineddata to your/tesseract-ocr/path/tessdata/xujc.traineddata
+  copy `traindata/xujc.traineddata` to `your/tesseract-ocr/path/tessdata/xujc.traineddata`
 
   eg. Ubuntu:
 
-  usr/share/tesseract-ocr/tessdata/xujc.traineddata
+  ```shell
+  $ sudo cp ./traindata/xujc.traineddata /usr/share/tesseract-ocr/tessdata/xujc.traineddata
+  ```
+4. run test script
+
+  ```shell
+  $ python test.py 
+  ```
+
+F&Q
+---
+1. pytesseract.pytesseract.TesseractError: (1, 'Error opening data file /usr/share/tesseract-ocr/tessdata/xujc.traineddata')
+
+  Make sure that you have copied the `tessdata/xujc.traineddata` file to `/usr/share/tesseract-ocr/tessdata`
