@@ -23,19 +23,19 @@ Get Start
   $ sudo apt-get install tesseract-ocr
   $ sudo pip install pytesseract
   ```
-3. copy traindata
+3. copy training_data
 
-  copy `traindata/xujc.traineddata` to `your/tesseract-ocr/path/tessdata/xujc.traineddata`
+  copy `training_data/xujc.traineddata` to `your/tesseract-ocr/path/tessdata/xujc.traineddata`
 
   eg. Ubuntu:
 
   ```shell
-  $ sudo cp ./traindata/xujc.traineddata /usr/share/tesseract-ocr/tessdata/xujc.traineddata
+  $ sudo cp ./training_data/xujc.traineddata /usr/share/tesseract-ocr/tessdata/xujc.traineddata
   ```
 4. run test script
 
   ```shell
-  $ python test.py 
+  $ python test.py
   ```
 
 F&Q
