@@ -87,14 +87,21 @@ def main():
     if len(args) < 1:
         parser.error('filename not given')
 
+    if options.verbose:
+        log_level = logging.INFO
+    else:
+        log_level = logging.WARNING
+
+    logging.basicConfig(level=log_level, format='%(message)s',)
+
     filename = args[0]
+    logging.info('recognition file: %s' % filename)
 
     image = Image.open(filename)
+    logging.info('image size: %s' % str(image.size))
     # convert to Gray Scale Image
     gray_img = image.convert('L')
     gray_img.save(r'./gray.png')
-
-    print image_to_string(gray_img, lang='xujc')
 
     clear_noise(gray_img)
 
