@@ -43,3 +43,7 @@ F&Q
 1. pytesseract.pytesseract.TesseractError: (1, 'Error opening data file /usr/share/tesseract-ocr/tessdata/xujc.traineddata')
 
   Make sure that you have copied the `tessdata/xujc.traineddata` file to `/usr/share/tesseract-ocr/tessdata`
+
+License
+---
+XujcCaptcha is available under the MIT license. See the LICENSE file for more info.
