@@ -6,6 +6,8 @@ import logging
 __author__ = 'luckytianyiyan@gmail.com'
 __version__ = "1.0"
 
+DEFAULT_THRESHOLD = 200
+
 
 def check(xy, img, matrix):
     try:
@@ -82,6 +84,7 @@ def main():
                           version='%prog ' + __version__,
                           description='recognition captcha for http://jw.xujc.com/')
     parser.add_option('-v', '--verbose', action="store_true", dest="verbose", help="verbose")
+    parser.add_option('-t', '--threshold', default=DEFAULT_THRESHOLD, dest="threshold", help="threshold for binary image (default:%default)")
     (options, args) = parser.parse_args()
 
     if len(args) < 1:
@@ -93,6 +96,8 @@ def main():
         log_level = logging.WARNING
 
     logging.basicConfig(level=log_level, format='%(message)s',)
+
+    parser.get_default_values()
 
     filename = args[0]
     logging.info('recognition file: %s' % filename)
@@ -106,7 +111,8 @@ def main():
     clear_noise(gray_img)
 
     # convert to Binary Image
-    threshold = 200
+    threshold = options.threshold
+    logging.info('threshold: %d' % threshold)
     table = []
     for i in range(256):
         if i < threshold:
