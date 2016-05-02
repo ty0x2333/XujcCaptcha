@@ -17,7 +17,6 @@ class XujcCaptcha:
     def recognition(self, image):
         # convert to Gray Scale Image
         gray_img = image.convert('L')
-        # gray_img.save(r'./gray.png')
 
         self.__clear_noise(gray_img)
 
@@ -29,10 +28,9 @@ class XujcCaptcha:
             else:
                 table.append(1)
 
-        gray_img = gray_img.point(table, '1')
-        # gray_img.save(r'./clear_noise.png')
+        binary_img = gray_img.point(table, '1')
 
-        return image_to_string(gray_img, lang='xujc')
+        return image_to_string(binary_img, lang='xujc')
 
     @staticmethod
     def __check(xy, img, matrix):
@@ -69,28 +67,36 @@ class XujcCaptcha:
                 r = [0, 0, 0]
                 s = [0, 0, 0]
                 if img.getpixel(center) < 255:
-                    if self.__check(left, img, matrix):# left
+                    # left
+                    if self.__check(left, img, matrix):
                         matrix[x][y] = matrix[x - 1][y]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(left_top, img, matrix):# left-top
+                    # left-top
+                    elif self.__check(left_top, img, matrix):
                         matrix[x][y] = matrix[x - 1][y - 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(top, img, matrix):# top
+                    # top
+                    elif self.__check(top, img, matrix):
                         matrix[x][y] = matrix[x][y - 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(right_bottom, img, matrix):# right-bottom
+                    # right-bottom
+                    elif self.__check(right_bottom, img, matrix):
                         matrix[x][y] = matrix[x + 1][y + 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(bottom, img, matrix):# bottom
+                    # bottom
+                    elif self.__check(bottom, img, matrix):
                         matrix[x][y] = matrix[x][y + 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(left_bottom, img, matrix):# left-bottom
+                    # left-bottom
+                    elif self.__check(left_bottom, img, matrix):
                         matrix[x][y] = matrix[x-1][y + 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(right_top, img, matrix):# right-top
+                    # right-top
+                    elif self.__check(right_top, img, matrix):
                         matrix[x][y] = matrix[x+1][y - 1]
                         maps[str(matrix[x][y])] += 1
-                    elif self.__check(right, img, matrix):# right
+                    # right
+                    elif self.__check(right, img, matrix):
                         matrix[x][y] = matrix[x + 1][y]
                         maps[str(matrix[x][y])] += 1
                     else:
