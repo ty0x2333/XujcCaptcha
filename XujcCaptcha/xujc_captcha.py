@@ -1,6 +1,4 @@
 from pytesseract import *
-__author__ = 'luckytianyiyan@gmail.com'
-__version__ = "1.0"
 
 DEFAULT_THRESHOLD = 200
 
