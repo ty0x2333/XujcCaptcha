@@ -1,7 +1,10 @@
 from __future__ import division
-from xujc_captcha import XujcCaptcha
+
 import os
+
 import Image
+
+from XujcCaptcha import XujcCaptcha
 
 # Colors
 BLUE = '\033[94m'
